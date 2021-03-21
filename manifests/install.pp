@@ -17,14 +17,16 @@ class teleport::install {
 
   file { $teleport::extract_path:
     ensure => directory,
-  } ->
+  }
+  ->
   archive { $teleport::archive_path:
     ensure       => present,
     extract      => true,
     extract_path => $teleport::extract_path,
     source       => "https://get.gravitational.com/teleport-v${teleport::version}-linux-${arch}-bin.tar.gz",
     creates      => "${teleport::extract_path}/teleport"
-  } ->
+  }
+  ->
   file {
     "${teleport::bin_dir}/tctl":
       ensure => link,
