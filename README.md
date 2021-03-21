@@ -74,6 +74,34 @@ Teleport has multiple [roles](http://gravitational.com/teleport/docs/architectur
   }
 ```
 
+### Setup a Teleport Server
+
+- auth_token: Token used to connect the clients
+
+```puppet
+  class { '::teleport':
+    version               => '5.1.0',
+    auth_enable           => true,
+    proxy_enable          => true,
+    auth_listen_addr      => '0.0.0.0',
+    proxy_web_listen_addr => '0.0.0.0',
+    auth_service_tokens   => [ 'node:pNVNrTIupUieGWGR0vz5LNOxUaNbgIgjsEZaIAxxGkHlz']
+  }
+```
+
+### Setup a Teleport Client
+
+- auth_servers is the IP Address of Teleport Server
+- auth_token is the token used to connect the clients to the Teleport Server 
+
+```puppet
+  class { '::teleport':
+    version      => '5.1.0',
+    auth_token   => 'pNVNrTIupUieGWGR0vz5LNOxUaNbgIgjsEZaIAxxGkHlz',
+    auth_servers => ['192.168.X.X']
+  }
+```
+
 ## Reference
 
 ### Classes
